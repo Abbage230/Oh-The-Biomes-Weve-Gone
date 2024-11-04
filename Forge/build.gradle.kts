@@ -37,7 +37,7 @@ loom {
         convertAccessWideners.set(true)
         extraAccessWideners.add(loom.accessWidenerPath.get().asFile.name)
 
-        mixinConfigs("biomeswevegone-common.mixins.json", "biomeswevegone.mixins.json")
+        mixinConfig("biomeswevegone-common.mixins.json")
     }
 
     runs.create("datagen") {
@@ -57,13 +57,13 @@ dependencies {
     modLocalRuntime("me.djtheredstoner:DevAuth-forge-latest:${project.properties["devauth_version"]}")
 
     modApi("com.github.glitchfiend:TerraBlender-forge:$minecraftVersion-${project.properties["terrablender_version"]}")
-    modApi("corgitaco.corgilib:Corgilib-Forge:$minecraftVersion-${project.properties["corgilib_version"]}")
-    modApi("dev.corgitaco:Oh-The-Trees-Youll-Grow-forge:$minecraftVersion-${project.properties["ohthetreesyoullgrow_version"]}")
+    modApi("corgitaco.corgilib:Corgilib-Forge:1.21.1-${project.properties["corgilib_version"]}")
+    modApi("dev.corgitaco:Oh-The-Trees-Youll-Grow-forge:1.21.1-${project.properties["ohthetreesyoullgrow_version"]}")
     modApi("software.bernie.geckolib:geckolib-forge-$minecraftVersion:${project.properties["geckolib_version"]}")
 
-    modCompileOnly("mcp.mobius.waila:wthit-api:forge-${project.properties["WTHIT"]}")
-    modLocalRuntime("mcp.mobius.waila:wthit:forge-${project.properties["WTHIT"]}")
-    modLocalRuntime("lol.bai:badpackets:forge-${project.properties["badPackets"]}")
+    //modCompileOnly("mcp.mobius.waila:wthit-api:forge-${project.properties["WTHIT"]}")
+    //modLocalRuntime("mcp.mobius.waila:wthit:forge-${project.properties["WTHIT"]}")
+    //modLocalRuntime("lol.bai:badpackets:forge-${project.properties["badPackets"]}")
 
     compileOnly("io.github.llamalad7:mixinextras-common:0.4.1")?.let { annotationProcessor(it) }
     include("io.github.llamalad7:mixinextras-forge:0.4.1")?.let { implementation(it) }
