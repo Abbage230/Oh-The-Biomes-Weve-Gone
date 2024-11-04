@@ -5,13 +5,13 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
-
 /**
  * ManOWar Entity Renderer
  * @see GeoEntityRenderer
@@ -41,8 +41,9 @@ public class ManOWarRenderer<T extends ManOWar> extends GeoEntityRenderer<T> {
         poseStack.translate(0.0D, -1.2000000476837158D, 0.0D);
     }
 
+
     @Override
-    protected float getShadowRadius(@NotNull T entity) {
-	    return entity.isBaby() ? 0.5f : 0.8f;
+    protected float getShadowRadius(@NotNull EntityRenderState entityRenderState) {
+        return 0.8f;  //TODO: Fix Baby Shadow Size
     }
 }

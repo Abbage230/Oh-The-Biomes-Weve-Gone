@@ -1,9 +1,9 @@
 package net.potionstudios.biomeswevegone.world.entity.oddion;
 
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
-
 
 /**
  * Oddion Entity Renderer
@@ -17,7 +17,7 @@ public class OddionRenderer<T extends Oddion> extends GeoEntityRenderer<T> {
     }
 
     @Override
-    protected float getShadowRadius(@NotNull T entity) {
+    protected float getShadowRadius(@NotNull EntityRenderState entityRenderState) {
         return 0.4f;
     }
 }
