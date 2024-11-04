@@ -260,12 +260,12 @@ public class PumpkinWarden extends PathfinderMob implements GeoEntity, VariantHo
         }
     }
 
-    @Override
-    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NotNull DifficultyInstance difficulty, @NotNull MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
-        this.setVariant(Variant.getSpawnVariant(level.getRandom()));
-        return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
-    }
 
+    @Override
+    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, @NotNull DifficultyInstance difficultyInstance, @NotNull EntitySpawnReason entitySpawnReason, @Nullable SpawnGroupData spawnGroupData) {
+        this.setVariant(Variant.getSpawnVariant(serverLevelAccessor.getRandom()));
+        return super.finalizeSpawn(serverLevelAccessor, difficultyInstance, entitySpawnReason, spawnGroupData);
+    }
 
     @Override
     public boolean canBeLeashed() {
