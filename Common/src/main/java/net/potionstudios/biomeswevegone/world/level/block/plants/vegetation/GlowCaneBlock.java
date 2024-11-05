@@ -21,6 +21,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.redstone.Orientation;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -72,11 +73,12 @@ public class GlowCaneBlock extends SugarCaneBlock implements SimpleWaterloggedBl
         } return false;
     }
 
+
     @Override
-    protected void neighborChanged(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Block neighborBlock, @NotNull BlockPos neighborPos, boolean movedByPiston) {
-        if (!state.canSurvive(level, pos)) {
-            if (state.getValue(WATERLOGGED)) level.setBlockAndUpdate(pos, Fluids.WATER.defaultFluidState().createLegacyBlock());
-            else level.destroyBlock(pos, true);
+    protected void neighborChanged(BlockState blockState, Level level, BlockPos blockPos, Block block, @Nullable Orientation orientation, boolean bl) {
+        if (!blockState.canSurvive(level, blockPos)) {
+            if (blockState.getValue(WATERLOGGED)) level.setBlockAndUpdate(blockPos, Fluids.WATER.defaultFluidState().createLegacyBlock());
+            else level.destroyBlock(blockPos, true);
         }
     }
 
