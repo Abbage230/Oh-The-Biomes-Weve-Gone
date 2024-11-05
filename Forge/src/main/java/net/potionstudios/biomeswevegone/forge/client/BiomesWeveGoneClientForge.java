@@ -3,7 +3,7 @@ package net.potionstudios.biomeswevegone.forge.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.FastColor;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.GrassColor;
@@ -89,7 +89,7 @@ public class BiomesWeveGoneClientForge {
         event.register((state, view, pos, tintIndex) -> view != null && pos != null ? BiomeColors.getAverageWaterColor(view, pos) : -1, BWGBlocks.CARVED_BARREL_CACTUS.get());
         event.register((state, view, pos, tintIndex) -> {
             int age = state.getValue(StemBlock.AGE);
-            return FastColor.ARGB32.color(age * 32, 255 - age, age *4);
+            return ARGB.color(age * 32, 255 - age, age *4);
         }, BWGBlocks.PALE_PUMPKIN_STEM.get());
         event.register((state, view, pos, tintIndex) -> -2046180, BWGBlocks.ATTACHED_PALE_PUMPKIN_STEM.get());
     }
