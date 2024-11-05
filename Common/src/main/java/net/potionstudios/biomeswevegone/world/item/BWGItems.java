@@ -48,17 +48,17 @@ public class BWGItems {
     public static final Supplier<Item> CATTAIL_SPROUT = registerItemNoLang("cattail_sprout", () -> new CampfireExplodingBlockItem(BWGBlocks.CATTAIL_SPROUT, new Item.Properties()));
     public static final Supplier<Item> FLUORESCENT_CATTAIL_SPROUT = registerItemNoLang("fluorescent_cattail_sprout", () -> new CampfireExplodingBlockItem(BWGBlocks.FLUORESCENT_CATTAIL_SPROUT, new Item.Properties()));
 
-    public static final Supplier<Item> BLUE_GLOWCANE_SHOOT = registerSimpleItem("blue_glowcane_shoot", () -> new ItemNameBlockItem(BWGBlocks.BLUE_GLOWCANE.get(), new Item.Properties()));
-    public static final Supplier<Item> GREEN_GLOWCANE_SHOOT = registerSimpleItem("green_glowcane_shoot", () -> new ItemNameBlockItem(BWGBlocks.GREEN_GLOWCANE.get(), new Item.Properties()));
-    public static final Supplier<Item> RED_GLOWCANE_SHOOT = registerSimpleItem("red_glowcane_shoot", () -> new ItemNameBlockItem(BWGBlocks.RED_GLOWCANE.get(), new Item.Properties()));
-    public static final Supplier<Item> YELLOW_GLOWCANE_SHOOT = registerSimpleItem("yellow_glowcane_shoot", () -> new ItemNameBlockItem(BWGBlocks.YELLOW_GLOWCANE.get(), new Item.Properties()));
+    public static final Supplier<Item> BLUE_GLOWCANE_SHOOT = registerSimpleItem("blue_glowcane_shoot", () -> new BlockItem(BWGBlocks.BLUE_GLOWCANE.get(), new Item.Properties().useItemDescriptionPrefix()));
+    public static final Supplier<Item> GREEN_GLOWCANE_SHOOT = registerSimpleItem("green_glowcane_shoot", () -> new BlockItem(BWGBlocks.GREEN_GLOWCANE.get(), new Item.Properties().useItemDescriptionPrefix()));
+    public static final Supplier<Item> RED_GLOWCANE_SHOOT = registerSimpleItem("red_glowcane_shoot", () -> new BlockItem(BWGBlocks.RED_GLOWCANE.get(), new Item.Properties().useItemDescriptionPrefix()));
+    public static final Supplier<Item> YELLOW_GLOWCANE_SHOOT = registerSimpleItem("yellow_glowcane_shoot", () -> new BlockItem(BWGBlocks.YELLOW_GLOWCANE.get(), new Item.Properties().useItemDescriptionPrefix()));
 
     public static final Supplier<Item> BLUE_GLOWCANE_POWDER = registerSimpleItem("blue_glowcane_powder", () -> new PowderItem(ColorProperty.BLUE));
     public static final Supplier<Item> GREEN_GLOWCANE_POWDER = registerSimpleItem("green_glowcane_powder", () -> new PowderItem(ColorProperty.GREEN));
     public static final Supplier<Item> RED_GLOWCANE_POWDER = registerSimpleItem("red_glowcane_powder", () -> new PowderItem(ColorProperty.RED));
     public static final Supplier<Item> YELLOW_GLOWCANE_POWDER = registerSimpleItem("yellow_glowcane_powder", () -> new PowderItem(ColorProperty.YELLOW));
 
-    public static final Supplier<Item> PALE_PUMPKIN_SEEDS = registerSimpleItem("pale_pumpkin_seeds", () -> new ItemNameBlockItem(BWGBlocks.PALE_PUMPKIN_STEM.get(), new Item.Properties()));
+    public static final Supplier<Item> PALE_PUMPKIN_SEEDS = registerSimpleItem("pale_pumpkin_seeds", () -> new BlockItem(BWGBlocks.PALE_PUMPKIN_STEM.get(), new Item.Properties().useItemDescriptionPrefix()));
 
     public static final Supplier<Item> BAOBAB_FRUIT = registerSimpleItem("baobab_fruit", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.35f).build())));
     public static final Supplier<Item> SOUL_FRUIT = registerSimpleItem("soul_fruit", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationModifier(0.35f).effect(new MobEffectInstance(MobEffects.BLINDNESS, 40), 1).build())));
@@ -67,18 +67,18 @@ public class BWGItems {
     public static final Supplier<Item> GREEN_APPLE = registerSimpleItem("green_apple", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationModifier(0.35f).build())));
     public static final Supplier<Item> GREEN_APPLE_PIE = registerSimpleItem("green_apple_pie", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.4f).effect(new MobEffectInstance(MobEffects.DIG_SPEED, 200, 0), 1.0F).build())));
 
-    public static final Supplier<Item> BLUEBERRIES = registerSimpleItem("blueberries", () -> new ItemNameBlockItem(BWGBlocks.BLUEBERRY_BUSH.get() , new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.1f).build())));
+    public static final Supplier<Item> BLUEBERRIES = registerSimpleItem("blueberries", () -> new BlockItem(BWGBlocks.BLUEBERRY_BUSH.get() , new Item.Properties().useItemDescriptionPrefix().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.1f).build())));
     public static final Supplier<Item> BLUEBERRY_PIE = registerSimpleItem("blueberry_pie", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.3f).effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 0), 1.0F).build())));
 
-    public static final Supplier<Item> ODDION_BULB = registerSimpleItem("oddion_bulb", () -> new ItemNameBlockItem(BWGBlocks.ODDION_CROP.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.35f).build())));
+    public static final Supplier<Item> ODDION_BULB = registerSimpleItem("oddion_bulb", () -> new BlockItem(BWGBlocks.ODDION_CROP.get(), new Item.Properties().useItemDescriptionPrefix().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.35f).build())));
     public static final Supplier<Item> COOKED_ODDION_BULB = registerSimpleItem("cooked_oddion_bulb", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationModifier(0.5f).build())));
-    public static final Supplier<Item> ALLIUM_ODDION_SOUP = registerSimpleItem("allium_oddion_soup", () -> new Item((new Item.Properties()).stacksTo(1).food((new FoodProperties.Builder()).nutrition(9).saturationModifier(1f).usingConvertsTo(Items.BOWL).build())));
+    public static final Supplier<Item> ALLIUM_ODDION_SOUP = registerSimpleItem("allium_oddion_soup", () -> new Item((new Item.Properties()).usingConvertsTo(Items.BOWL).stacksTo(1).food((new FoodProperties.Builder()).nutrition(9).saturationModifier(1f).build())));
     public static final Supplier<Item> BLOOMING_ODDION = registerSimpleItem("blooming_oddion", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(9).saturationModifier(1.2f).build())));
 
-    public static final Supplier<Item> WHITE_PUFFBALL_SPORES = registerSimpleItem("white_puffball_spores", () -> new ItemNameBlockItem(BWGBlocks.WHITE_PUFFBALL.getBlock(), new Item.Properties()));
+    public static final Supplier<Item> WHITE_PUFFBALL_SPORES = registerSimpleItem("white_puffball_spores", () -> new BlockItem(BWGBlocks.WHITE_PUFFBALL.getBlock(), new Item.Properties().useItemDescriptionPrefix()));
     public static final Supplier<Item> WHITE_PUFFBALL_CAP = registerSimpleItem("white_puffball_cap", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationModifier(0.2f).build())));
     public static final Supplier<Item> COOKED_WHITE_PUFFBALL_CAP = registerSimpleItem("cooked_white_puffball_cap", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationModifier(0.6f).build())));
-    public static final Supplier<Item> WHITE_PUFFBALL_STEW = registerSimpleItem("white_puffball_stew", () -> new Item((new Item.Properties()).stacksTo(1).food((new FoodProperties.Builder()).nutrition(9).saturationModifier(1F).usingConvertsTo(Items.BOWL).build())));
+    public static final Supplier<Item> WHITE_PUFFBALL_STEW = registerSimpleItem("white_puffball_stew", () -> new Item((new Item.Properties()).usingConvertsTo(Items.BOWL).stacksTo(1).food((new FoodProperties.Builder()).nutrition(9).saturationModifier(1F).build())));
 
     public static final Supplier<Item> ALOE_VERA_JUICE = registerSimpleItem("aloe_vera_juice", () -> new HoneyBottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16).food(new FoodProperties.Builder().nutrition(3).saturationModifier(1.0F).build())));
 

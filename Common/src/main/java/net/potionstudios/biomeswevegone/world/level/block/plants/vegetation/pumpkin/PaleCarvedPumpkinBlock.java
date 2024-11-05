@@ -37,7 +37,7 @@ public class PaleCarvedPumpkinBlock extends CarvedPumpkinBlock {
     }
 
     public PaleCarvedPumpkinBlock() {
-        this(BlockBehaviour.Properties.ofFullCopy(Blocks.JACK_O_LANTERN).lightLevel(light -> 14));
+        this(BlockBehaviour.Properties.ofFullCopy(Blocks.CARVED_PUMPKIN));
     }
 
     @Override
