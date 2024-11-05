@@ -15,10 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
@@ -46,7 +43,7 @@ public class BWGFruitBlock extends Block implements BonemealableBlock {
     public BWGFruitBlock(Properties properties, Supplier<Supplier<Item>> fruit, String leaves) {
         super(properties);
         this.fruit = fruit;
-        this.leaves = Suppliers.memoize(() -> (LeavesBlock) BuiltInRegistries.BLOCK.get(BiomesWeveGone.id(leaves)));
+        this.leaves = Suppliers.memoize(() -> (LeavesBlock) BuiltInRegistries.BLOCK.getValue(BiomesWeveGone.id(leaves)));
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
     }
 
@@ -77,9 +74,10 @@ public class BWGFruitBlock extends Block implements BonemealableBlock {
         return this.fruit.get().get().getDefaultInstance();
     }
 
+
     @Override
-    protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack, BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
-        return (state.getValue(AGE) != MAX_AGE) && stack.is(Items.BONE_MEAL) ? ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION : super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    protected @NotNull InteractionResult useItemOn(@NotNull ItemStack stack, BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
+        return (state.getValue(AGE) != MAX_AGE) && stack.is(Items.BONE_MEAL) ? InteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION : super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override
@@ -99,8 +97,8 @@ public class BWGFruitBlock extends Block implements BonemealableBlock {
     }
 
     @Override
-    public @NotNull BlockState updateShape(BlockState state, @NotNull Direction direction, @NotNull BlockState neighborState, @NotNull LevelAccessor level, @NotNull BlockPos pos, @NotNull BlockPos neighborPos) {
-        return !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+    protected BlockState updateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos blockPos2, BlockState blockState2, RandomSource randomSource) {
+        return !blockState.canSurvive(levelReader, blockPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(blockState, levelReader, scheduledTickAccess, blockPos, direction, blockPos2, blockState2, randomSource);
     }
 
     @Override
