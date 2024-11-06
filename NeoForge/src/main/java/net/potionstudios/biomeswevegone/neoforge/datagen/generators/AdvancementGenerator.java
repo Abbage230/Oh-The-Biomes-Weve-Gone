@@ -2,13 +2,17 @@ package net.potionstudios.biomeswevegone.neoforge.datagen.generators;
 
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.*;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.advancements.packs.VanillaAdventureAdvancements;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.potionstudios.biomeswevegone.BiomesWeveGone;
@@ -28,6 +32,8 @@ public class AdvancementGenerator implements AdvancementProvider.AdvancementGene
 
     @Override
     public void generate(HolderLookup.@NotNull Provider arg, @NotNull Consumer<AdvancementHolder> consumer, @NotNull ExistingFileHelper existingFileHelper) {
+        HolderGetter<Item> itemHolderGetter = arg.lookupOrThrow(Registries.ITEM);
+        HolderGetter<Block> blockHolderGetter = arg.lookupOrThrow(Registries.BLOCK);
         AdvancementHolder root = Advancement.Builder.advancement()
                 .addCriterion("tick", PlayerTrigger.TriggerInstance.tick())
                 .display(
@@ -196,8 +202,8 @@ public class AdvancementGenerator implements AdvancementProvider.AdvancementGene
         Advancement.Builder.advancement()
                 .parent(husbandryRoot)
                 .requirements(AdvancementRequirements.Strategy.OR)
-                .addCriterion("cattail_sprout", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(BlockTags.CAMPFIRES)), ItemPredicate.Builder.item().of(BWGItems.CATTAIL_SPROUT.get())))
-                .addCriterion("fluorescent_cattail_sprout", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(BlockTags.CAMPFIRES)), ItemPredicate.Builder.item().of(BWGItems.FLUORESCENT_CATTAIL_SPROUT.get())))
+                .addCriterion("cattail_sprout", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blockHolderGetter, BlockTags.CAMPFIRES)), ItemPredicate.Builder.item().of(itemHolderGetter, BWGItems.CATTAIL_SPROUT.get())))
+                .addCriterion("fluorescent_cattail_sprout", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blockHolderGetter, BlockTags.CAMPFIRES)), ItemPredicate.Builder.item().of(itemHolderGetter, BWGItems.FLUORESCENT_CATTAIL_SPROUT.get())))
                 .display(
                         BWGItems.CATTAIL_SPROUT.get(),
                         translateAble("husbandry.hot_diggity_not_dog.title"),
@@ -207,8 +213,8 @@ public class AdvancementGenerator implements AdvancementProvider.AdvancementGene
 
         Advancement.Builder.advancement()
                 .parent(husbandryRoot)
-                .rewards(new AdvancementRewards.Builder().addLootTable(BiomesWeveGone.key(Registries.LOOT_TABLE, "blocks/pale_pumpkin")))
-                .addCriterion("forgotten_nostalgia", PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(ItemPredicate.Builder.item().of(BWGItemTags.ROSES), Optional.of(EntityPredicate.wrap(EntityPredicate.Builder.entity().of(BWGEntities.PUMPKIN_WARDEN.get())))))
+                .rewards(new AdvancementRewards.Builder().addLootTable(ResourceKey.create(Registries.LOOT_TABLE, BiomesWeveGone.id("blocks/pale_pumpkin"))))
+                .addCriterion("forgotten_nostalgia", PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(ItemPredicate.Builder.item().of(itemHolderGetter, BWGItemTags.ROSES), Optional.of(EntityPredicate.wrap(EntityPredicate.Builder.entity().of(arg.lookupOrThrow(Registries.ENTITY_TYPE), BWGEntities.PUMPKIN_WARDEN.get())))))
                 .display(
                         BWGBlocks.ROSE.getBlock().asItem(),
                         translateAble("husbandry.forgotten_nostalgia.title"),
