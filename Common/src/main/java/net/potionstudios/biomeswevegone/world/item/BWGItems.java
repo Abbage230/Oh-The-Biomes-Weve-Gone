@@ -1,5 +1,6 @@
 package net.potionstudios.biomeswevegone.world.item;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
@@ -10,6 +11,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.potionstudios.biomeswevegone.BiomesWeveGone;
@@ -61,14 +64,34 @@ public class BWGItems {
     public static final Supplier<Item> PALE_PUMPKIN_SEEDS = registerSimpleItem("pale_pumpkin_seeds", () -> new BlockItem(BWGBlocks.PALE_PUMPKIN_STEM.get(), new Item.Properties().useItemDescriptionPrefix()));
 
     public static final Supplier<Item> BAOBAB_FRUIT = registerSimpleItem("baobab_fruit", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.35f).build())));
-    public static final Supplier<Item> SOUL_FRUIT = registerSimpleItem("soul_fruit", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationModifier(0.35f).effect(new MobEffectInstance(MobEffects.BLINDNESS, 40), 1).build())));
+    public static final Supplier<Item> SOUL_FRUIT = registerSimpleItem("soul_fruit", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationModifier(0.35f).build(),
+            Consumables.defaultFood().onConsume(new ApplyStatusEffectsConsumeEffect(
+                    ImmutableList.of(
+                            new MobEffectInstance(MobEffects.BLINDNESS, 40)
+                    )
+            )).build()
+    )));
     public static final Supplier<Item> YUCCA_FRUIT = registerSimpleItem("yucca_fruit", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.35f).build())));
     public static final Supplier<Item> COOKED_YUCCA_FRUIT = registerSimpleItem("cooked_yucca_fruit", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationModifier(0.4f).build())));
     public static final Supplier<Item> GREEN_APPLE = registerSimpleItem("green_apple", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationModifier(0.35f).build())));
-    public static final Supplier<Item> GREEN_APPLE_PIE = registerSimpleItem("green_apple_pie", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.4f).effect(new MobEffectInstance(MobEffects.DIG_SPEED, 200, 0), 1.0F).build())));
+    public static final Supplier<Item> GREEN_APPLE_PIE = registerSimpleItem("green_apple_pie", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.4f).build(),
+            Consumables.defaultFood().onConsume(
+            new ApplyStatusEffectsConsumeEffect(
+                    ImmutableList.of(
+                            new MobEffectInstance(MobEffects.DIG_SPEED, 200)
+                    )
+            )).build()
+    )));
 
     public static final Supplier<Item> BLUEBERRIES = registerSimpleItem("blueberries", () -> new BlockItem(BWGBlocks.BLUEBERRY_BUSH.get() , new Item.Properties().useItemDescriptionPrefix().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.1f).build())));
-    public static final Supplier<Item> BLUEBERRY_PIE = registerSimpleItem("blueberry_pie", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.3f).effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 0), 1.0F).build())));
+    public static final Supplier<Item> BLUEBERRY_PIE = registerSimpleItem("blueberry_pie", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.3f).build(),
+            Consumables.defaultFood().onConsume(
+                    new ApplyStatusEffectsConsumeEffect(
+                            ImmutableList.of(
+                                    new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200)
+                            )
+                    )).build()
+    )));
 
     public static final Supplier<Item> ODDION_BULB = registerSimpleItem("oddion_bulb", () -> new BlockItem(BWGBlocks.ODDION_CROP.get(), new Item.Properties().useItemDescriptionPrefix().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.35f).build())));
     public static final Supplier<Item> COOKED_ODDION_BULB = registerSimpleItem("cooked_oddion_bulb", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationModifier(0.5f).build())));
@@ -80,7 +103,7 @@ public class BWGItems {
     public static final Supplier<Item> COOKED_WHITE_PUFFBALL_CAP = registerSimpleItem("cooked_white_puffball_cap", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationModifier(0.6f).build())));
     public static final Supplier<Item> WHITE_PUFFBALL_STEW = registerSimpleItem("white_puffball_stew", () -> new Item((new Item.Properties()).usingConvertsTo(Items.BOWL).stacksTo(1).food((new FoodProperties.Builder()).nutrition(9).saturationModifier(1F).build())));
 
-    public static final Supplier<Item> ALOE_VERA_JUICE = registerSimpleItem("aloe_vera_juice", () -> new HoneyBottleItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16).food(new FoodProperties.Builder().nutrition(3).saturationModifier(1.0F).build())));
+    public static final Supplier<Item> ALOE_VERA_JUICE = registerSimpleItem("aloe_vera_juice", () -> new Item(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16).food(new FoodProperties.Builder().nutrition(3).saturationModifier(1.0F).build(), Consumables.HONEY_BOTTLE).usingConvertsTo(Items.GLASS_BOTTLE)));
 
     public static final Supplier<PlaceOnWaterBlockItem> TINY_LILY_PADS = registerItemNoLang("tiny_lily_pads", () -> new PlaceOnWaterBlockItem(BWGBlocks.TINY_LILY_PADS.get(), new Item.Properties()));
     public static final Supplier<PlaceOnWaterBlockItem> FLOWERING_TINY_LILY_PADS = registerItemNoLang("flowering_tiny_lily_pads", () -> new PlaceOnWaterBlockItem(BWGBlocks.FLOWERING_TINY_LILY_PADS.get(), new Item.Properties()));
