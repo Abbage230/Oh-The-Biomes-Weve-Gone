@@ -5,6 +5,11 @@ import net.minecraft.data.BlockFamilies;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.entity.vehicle.ChestBoat;
+import net.minecraft.world.item.BoatItem;
 import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SignItem;
@@ -19,9 +24,8 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.potionstudios.biomeswevegone.BiomesWeveGone;
 import net.potionstudios.biomeswevegone.PlatformHandler;
-import net.potionstudios.biomeswevegone.world.entity.boats.BWGBoatEntity;
+import net.potionstudios.biomeswevegone.world.entity.BWGEntities;
 import net.potionstudios.biomeswevegone.world.item.BWGItems;
-import net.potionstudios.biomeswevegone.world.item.boat.BWGBoatItem;
 import net.potionstudios.biomeswevegone.world.level.block.plants.PottedBlock;
 import net.potionstudios.biomeswevegone.world.level.block.wood.sign.BWGCeilingHangingSignBlock;
 import net.potionstudios.biomeswevegone.world.level.block.wood.sign.BWGStandingSignBlock;
@@ -70,6 +74,8 @@ public class BWGWoodSet {
     private final Supplier<CraftingTableBlock> craftingTable;
     private @Nullable PottedBlock sapling = null;
     private @Nullable Supplier<LeavesBlock> leaves = null;
+    private final Supplier<EntityType<Boat>> boat;
+    private final Supplier<EntityType<ChestBoat>> chestBoat;
     private final Supplier<Item> boatItem;
     private final Supplier<Item> chestBoatItem;
 
@@ -118,8 +124,10 @@ public class BWGWoodSet {
             else this.leaves = BWGWood.registerBlockItem(name + "_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES).mapColor(mapColor)));
         }
 
-        this.boatItem = BWGWood.registerItem(name + "_boat", () -> new BWGBoatItem(false, BWGBoatEntity.Type.byName(name), new Item.Properties().stacksTo(1)));
-        this.chestBoatItem = BWGWood.registerItem(name + "_chest_boat", () -> new BWGBoatItem(true, BWGBoatEntity.Type.byName(name), new Item.Properties().stacksTo(1)));
+        this.boat = BWGEntities.createEntity(name + "_boat", EntityType.boatFactory(boatItem()), MobCategory.MISC, EntityType.ACACIA_BOAT.getWidth(), EntityType.ACACIA_BOAT.getHeight(), 10);
+        this.chestBoat = BWGEntities.createEntity(name + "_chest_boat", EntityType.chestBoatFactory(boatItem()), MobCategory.MISC, EntityType.ACACIA_CHEST_BOAT.getWidth(), EntityType.ACACIA_CHEST_BOAT.getHeight(), 10);
+        this.boatItem = BWGWood.registerItem(name + "_boat", () -> new BoatItem(boat.get(), new Item.Properties().stacksTo(1)));
+        this.chestBoatItem = BWGWood.registerItem(name + "_chest_boat", () -> new BoatItem(chestBoat.get(), new Item.Properties().stacksTo(1)));
         this.logBlockTag = TagKey.create(Registries.BLOCK, BiomesWeveGone.id(name + "_logs"));
         this.logItemTag = TagKey.create(Registries.ITEM, BiomesWeveGone.id(name + "_logs"));
         woodSets.add(this);
@@ -258,8 +266,16 @@ public class BWGWoodSet {
         return null;
     }
 
+    public Supplier<EntityType<Boat>> boat() {
+        return boat;
+    }
+
     public Supplier<Item> boatItem() {
         return boatItem;
+    }
+
+    public Supplier<EntityType<ChestBoat>> chestBoat() {
+        return chestBoat;
     }
 
     public Supplier<Item> chestBoatItem() {

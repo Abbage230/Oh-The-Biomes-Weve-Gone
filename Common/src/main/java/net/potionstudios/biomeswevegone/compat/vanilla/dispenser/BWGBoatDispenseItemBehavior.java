@@ -10,8 +10,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.phys.Vec3;
 import net.potionstudios.biomeswevegone.world.entity.BWGEntities;
-import net.potionstudios.biomeswevegone.world.entity.boats.BWGBoatEntity;
-import net.potionstudios.biomeswevegone.world.entity.boats.BWGChestBoatEntity;
 import org.jetbrains.annotations.NotNull;
 
 /**

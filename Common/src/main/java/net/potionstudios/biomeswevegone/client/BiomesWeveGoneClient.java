@@ -2,11 +2,11 @@ package net.potionstudios.biomeswevegone.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.BoatModel;
-import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.*;
+import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.BlockPos;
@@ -17,9 +17,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraft.world.level.levelgen.synth.ImprovedNoise;
-import net.potionstudios.biomeswevegone.client.renderer.BWGBoatRenderer;
+import net.potionstudios.biomeswevegone.BiomesWeveGone;
 import net.potionstudios.biomeswevegone.world.entity.BWGEntities;
-import net.potionstudios.biomeswevegone.world.entity.boats.BWGBoatEntity;
 import net.potionstudios.biomeswevegone.world.entity.manowar.ManOWarRenderer;
 import net.potionstudios.biomeswevegone.world.entity.oddion.OddionRenderer;
 import net.potionstudios.biomeswevegone.world.entity.pumpkinwarden.PumpkinWardenRenderer;
@@ -63,8 +62,21 @@ public class BiomesWeveGoneClient {
         consumer.accept(BWGEntities.MAN_O_WAR.get(), ManOWarRenderer::new);
         consumer.accept(BWGEntities.PUMPKIN_WARDEN.get(), PumpkinWardenRenderer::new);
         consumer.accept(BWGEntities.ODDION.get(), OddionRenderer::new);
-        consumer.accept(BWGEntities.BWG_BOAT.get(), context -> new BWGBoatRenderer(context, false));
-        consumer.accept(BWGEntities.BWG_CHEST_BOAT.get(), context -> new BWGBoatRenderer(context, true));
+        BWGWoodSet.woodsets().forEach(bwgWoodSet -> {
+            consumer.accept(bwgWoodSet.boat().get(), context -> new BoatRenderer(context, new ModelLayerLocation(BiomesWeveGone.id("boat/" + bwgWoodSet.name()), "main")));
+            consumer.accept(bwgWoodSet.chestBoat().get(), context -> new BoatRenderer(context, new ModelLayerLocation(BiomesWeveGone.id("chest_boat/" + bwgWoodSet.name()), "main")));
+        });
+    }
+
+    /**
+     * Registers the layer definitions for the boat models.
+     * @see ModelLayerLocation
+     */
+    public static void registerLayerDefinitions(BiConsumer<ModelLayerLocation, Supplier<LayerDefinition>> consumer) {
+        BWGWoodSet.woodsets().forEach(bwgWoodSet -> {
+            consumer.accept(new ModelLayerLocation(BiomesWeveGone.id("boat/" + bwgWoodSet.name()), "main"), BoatModel::createBoatModel);
+            consumer.accept(new ModelLayerLocation(BiomesWeveGone.id("chest_boat/" + bwgWoodSet.name()), "main"), BoatModel::createChestBoatModel);
+        });
     }
 
     /**
@@ -75,17 +87,6 @@ public class BiomesWeveGoneClient {
     public static void registerBlockEntityRenderers(BiConsumer<BlockEntityType<? extends BlockEntity>, BlockEntityRendererProvider> consumer) {
         consumer.accept(BWGBlockEntities.SIGNS.get(), SignRenderer::new);
         consumer.accept(BWGBlockEntities.HANGING_SIGNS.get(), HangingSignRenderer::new);
-    }
-
-    /**
-     * Registers the layer definitions for the boat models.
-     * @see BWGBoatRenderer
-     */
-    public static void registerLayerDefinitions(BiConsumer<ModelLayerLocation, Supplier<LayerDefinition>> consumer) {
-        for (BWGBoatEntity.Type type : BWGBoatEntity.Type.values()) {
-            consumer.accept(BWGBoatRenderer.createBoatModelName(type), BoatModel::createBodyModel);
-            consumer.accept(BWGBoatRenderer.createChestBoatModelName(type), ChestBoatModel::createBodyModel);
-        }
     }
 
     private static final ImprovedNoise NOISE = new ImprovedNoise(new XoroshiroRandomSource(1));

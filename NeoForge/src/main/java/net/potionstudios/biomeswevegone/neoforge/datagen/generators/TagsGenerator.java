@@ -431,7 +431,7 @@ public class TagsGenerator {
         protected void addTags(HolderLookup.@NotNull Provider provider) {
             tag(EntityTypeTags.CAN_BREATHE_UNDER_WATER).add(BWGEntities.MAN_O_WAR.get());
             tag(EntityTypeTags.AQUATIC).add(BWGEntities.MAN_O_WAR.get());
-            tag(Tags.EntityTypes.BOATS).add(BWGEntities.BWG_BOAT.get(), BWGEntities.BWG_CHEST_BOAT.get());
+            BWGWoodSet.woodsets().forEach(bwgWoodSet -> tag(Tags.EntityTypes.BOATS).add(bwgWoodSet.boat().get(), bwgWoodSet.chestBoat().get()));
         }
     }
 
