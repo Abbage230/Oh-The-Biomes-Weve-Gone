@@ -61,10 +61,6 @@ dependencies {
     modApi("dev.corgitaco:Oh-The-Trees-Youll-Grow-forge:1.21.1-${project.properties["ohthetreesyoullgrow_version"]}")
     modApi("software.bernie.geckolib:geckolib-forge-$minecraftVersion:${project.properties["geckolib_version"]}")
 
-    //modCompileOnly("mcp.mobius.waila:wthit-api:forge-${project.properties["WTHIT"]}")
-    //modLocalRuntime("mcp.mobius.waila:wthit:forge-${project.properties["WTHIT"]}")
-    //modLocalRuntime("lol.bai:badpackets:forge-${project.properties["badPackets"]}")
-
     compileOnly("io.github.llamalad7:mixinextras-common:0.4.1")?.let { annotationProcessor(it) }
     include("io.github.llamalad7:mixinextras-forge:0.4.1")?.let { implementation(it) }
 }
@@ -97,5 +93,4 @@ publisher {
     val depends = mutableListOf("terrablender", "geckolib", "corgilib", "oh-the-trees-youll-grow")
     curseDepends.required.set(depends)
     modrinthDepends.required.set(depends)
-    curseDepends.optional.set(mutableListOf("wthit-forge"))
 }

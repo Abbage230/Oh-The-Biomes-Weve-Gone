@@ -49,15 +49,6 @@ public interface PlatformHandler {
 	Path configPath();
 
 	/**
-	 * Registers a block entity with the specified parameters
-	 * @see BlockEntityType
-	 * @param key The id/name of the block entity
-	 * @param builder The builder for the block entity
-	 * @return Supplier of the BlockEntityType
-	 */
-	<T extends BlockEntity> Supplier<BlockEntityType<T>> registerBlockEntity(String key, Supplier<BlockEntityType.Builder<T>> builder);
-
-	/**
 	 * Register POI Type
 	 */
 	default Supplier<PoiType> registerPOIType(String id, Supplier<Block> block, int maxTickets, int validRange) {
