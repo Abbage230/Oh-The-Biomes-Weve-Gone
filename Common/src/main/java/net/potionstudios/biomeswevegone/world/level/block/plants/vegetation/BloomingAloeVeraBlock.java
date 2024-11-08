@@ -13,20 +13,16 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.DoublePlantBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.potionstudios.biomeswevegone.tags.BWGItemTags;
 import net.potionstudios.biomeswevegone.world.level.block.BWGBlocks;
 import org.jetbrains.annotations.NotNull;
 
 public class BloomingAloeVeraBlock extends DoublePlantBlock {
-    public BloomingAloeVeraBlock() {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.0f).sound(SoundType.WET_GRASS)
-                .noOcclusion().noCollission().pushReaction(PushReaction.DESTROY));
+    public BloomingAloeVeraBlock(BlockBehaviour.Properties properties) {
+        super(properties);
     }
 
     @Override

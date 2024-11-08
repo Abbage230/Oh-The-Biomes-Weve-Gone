@@ -19,8 +19,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.redstone.Orientation;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,8 +31,8 @@ public class GlowCaneBlock extends SugarCaneBlock implements SimpleWaterloggedBl
 
     private final Supplier<Supplier<Item>> shoot;
 
-    public GlowCaneBlock(Supplier<Supplier<Item>> shoot) {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY).lightLevel(level -> 10));
+    public GlowCaneBlock(BlockBehaviour.Properties properties, Supplier<Supplier<Item>> shoot) {
+        super(properties);
         this.shoot = shoot;
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false).setValue(AGE, 0));
     }

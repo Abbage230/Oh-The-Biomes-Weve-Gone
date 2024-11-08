@@ -66,8 +66,8 @@ public class ForgePlatformHandler implements PlatformHandler {
 	}
 
 	@Override
-	public Supplier<BWGFarmLandBlock> bwgFarmLandBlock(Supplier<Block> dirt) {
-		return () -> new net.potionstudios.biomeswevegone.forge.world.level.block.BWGFarmLandBlock(dirt);
+	public BWGFarmLandBlock bwgFarmLandBlock(BlockBehaviour.Properties properties, Supplier<Block> dirt) {
+		return new net.potionstudios.biomeswevegone.forge.world.level.block.BWGFarmLandBlock(properties, dirt);
 	}
 
 	@Override

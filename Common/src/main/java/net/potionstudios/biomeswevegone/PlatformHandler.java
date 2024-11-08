@@ -13,6 +13,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.Fluid;
@@ -87,8 +88,8 @@ public interface PlatformHandler {
 		return () -> new MobBucketItem(entity.get(), fluid.get(), sound.get(), new Item.Properties().stacksTo(1));
 	}
 
-	default Supplier<BWGFarmLandBlock> bwgFarmLandBlock(Supplier<Block> dirt) {
-		return () -> new BWGFarmLandBlock(dirt);
+	default BWGFarmLandBlock bwgFarmLandBlock(BlockBehaviour.Properties properties, Supplier<Block> dirt) {
+		return new BWGFarmLandBlock(properties, dirt);
 	}
 
 	/**

@@ -11,7 +11,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -23,8 +22,8 @@ import net.potionstudios.biomeswevegone.world.level.block.BWGBlocks;
 import org.jetbrains.annotations.NotNull;
 
 public class HydrangeaHedgeBlock extends BWGPlacementBushBlock{
-    public HydrangeaHedgeBlock() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.AZALEA),
+    public HydrangeaHedgeBlock(BlockBehaviour.Properties properties) {
+        super(properties,
                 Shapes.or(Block.box(0.0D, 8.0D, 0.0D, 16.0D, 16.0D, 16.0D), Block.box(6.0D, 0.0D, 6.0D, 10.0D, 8.0D, 10.0D)),
                 BWGBlockTags.HYDRANGEA_BUSH_PLACEABLE);
     }

@@ -14,7 +14,6 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,8 +27,8 @@ public class BWGFarmLandBlock extends FarmBlock {
 
     private final Supplier<Block> dirt;
 
-    public BWGFarmLandBlock(Supplier<Block> dirt) {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.FARMLAND).strength(0.2f));
+    public BWGFarmLandBlock(BlockBehaviour.Properties properties, Supplier<Block> dirt) {
+        super(properties);
         this.dirt = dirt;
     }
 

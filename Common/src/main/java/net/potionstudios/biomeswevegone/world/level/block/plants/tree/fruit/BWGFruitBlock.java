@@ -53,10 +53,6 @@ public class BWGFruitBlock extends Block implements BonemealableBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
     }
 
-    public BWGFruitBlock(Supplier<Supplier<Item>> fruit, String leaves) {
-        this(Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH), fruit, leaves);
-    }
-
     @Override
     public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return switch (state.getValue(AGE)) {

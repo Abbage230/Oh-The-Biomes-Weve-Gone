@@ -10,23 +10,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.potionstudios.biomeswevegone.world.level.block.BWGBlocks;
 import org.jetbrains.annotations.NotNull;
 
 public class AloeVeraBlock extends BushBlock implements BonemealableBlock {
 
     private static final MapCodec<AloeVeraBlock> CODEC = simpleCodec(AloeVeraBlock::new);
-
-    public AloeVeraBlock() {
-        this(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.0f).sound(SoundType.WET_GRASS)
-                .noOcclusion().noCollission().randomTicks().pushReaction(PushReaction.DESTROY));
-    }
 
     public AloeVeraBlock(Properties properties) {
         super(properties);

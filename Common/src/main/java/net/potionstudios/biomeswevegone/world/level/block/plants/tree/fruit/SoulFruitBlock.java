@@ -5,7 +5,6 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
@@ -13,10 +12,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
 import net.potionstudios.biomeswevegone.client.BWGSounds;
 import net.potionstudios.biomeswevegone.world.item.BWGItems;
@@ -24,8 +21,8 @@ import net.potionstudios.biomeswevegone.world.level.block.wood.BWGWood;
 import org.jetbrains.annotations.NotNull;
 
 public class SoulFruitBlock extends BWGFruitBlock {
-	public SoulFruitBlock() {
-		super(Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).lightLevel(light -> 14).mapColor(MapColor.COLOR_PURPLE).sound(new SoundType(0.25f, 1f, BWGSounds.SOUL_FRUIT_WAIL.get(), SoundEvents.GRASS_STEP, SoundEvents.SWEET_BERRY_BUSH_PLACE, SoundEvents.GRASS_HIT, SoundEvents.GRASS_FALL)), () -> BWGItems.SOUL_FRUIT, BWGWood.FLOWERING_SPIRIT_LEAVES);
+	public SoulFruitBlock(BlockBehaviour.Properties properties) {
+		super(properties, () -> BWGItems.SOUL_FRUIT, BWGWood.FLOWERING_SPIRIT_LEAVES);
 	}
 
 	@Override
