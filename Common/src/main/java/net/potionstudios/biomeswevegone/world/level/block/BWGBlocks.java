@@ -335,14 +335,14 @@ public class BWGBlocks {
 
     public static <B extends Block> Supplier<B> registerBlockItem(String key, Function<BlockBehaviour.Properties, B> function, BlockBehaviour.Properties properties) {
         Supplier<B> block = registerBlock(key, function, properties);
-        Supplier<Item> item = BWGItems.register(key, () -> new BlockItem(block.get(), new Item.Properties()));
+        Supplier<Item> item = BWGItems.register(key, itemProperties -> new BlockItem(block.get(), itemProperties), new Item.Properties());
         BLOCK_ITEMS.add(item);
         return block;
     }
 
     public static <B extends Block> Supplier<B> registerBlockItemNoTab(String key, Function<BlockBehaviour.Properties, B> function, BlockBehaviour.Properties properties) {
         Supplier<B> block = registerBlock(key, function, properties);
-        Supplier<Item> item = BWGItems.register(key, () -> new BlockItem(block.get(), new Item.Properties()));
+        Supplier<Item> item = BWGItems.register(key, itemProperties -> new BlockItem(block.get(), itemProperties), new Item.Properties());
         return block;
     }
 
