@@ -34,10 +34,6 @@ public class BWGBerryBush extends SweetBerryBushBlock {
         this.hurtEntityInside = hurtEntityInside;
     }
 
-    public BWGBerryBush(Supplier<Supplier<Item>> item, boolean hurtEntityInside) {
-        this(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH), item, hurtEntityInside);
-    }
-
     @Override
     public @NotNull ItemStack getCloneItemStack(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state) {
         return item.get().get().getDefaultInstance();
