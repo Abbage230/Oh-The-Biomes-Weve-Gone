@@ -28,8 +28,8 @@ import net.potionstudios.biomeswevegone.world.damagesource.BWGDamageTypes;
 import org.jetbrains.annotations.NotNull;
 
 public class BWGQuickSand extends ColoredFallingBlock {
-	public BWGQuickSand(int dustColor) {
-		super(new ColorRGBA(dustColor), BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).noCollission().isValidSpawn(Blocks::never));
+	public BWGQuickSand(BlockBehaviour.Properties properties, int dustColor) {
+		super(new ColorRGBA(dustColor), properties);
 	}
 
 	@Override

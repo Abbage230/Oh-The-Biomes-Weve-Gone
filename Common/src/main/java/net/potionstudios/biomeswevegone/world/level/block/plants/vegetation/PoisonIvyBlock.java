@@ -16,8 +16,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class PoisonIvyBlock extends VineBlock {
 
-    public PoisonIvyBlock() {
-        super(BlockBehaviour.Properties.of().sound(SoundType.GRASS).strength(0.2f).randomTicks().noCollission());
+    public PoisonIvyBlock(BlockBehaviour.Properties properties) {
+        super(properties);
     }
 
     @Override

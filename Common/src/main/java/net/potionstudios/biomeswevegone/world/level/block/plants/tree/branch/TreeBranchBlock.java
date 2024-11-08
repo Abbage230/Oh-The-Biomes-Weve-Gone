@@ -30,10 +30,6 @@ public class TreeBranchBlock extends BaseCoralPlantTypeBlock implements Bonemeal
 
     private static final MapCodec<TreeBranchBlock> CODEC = simpleCodec(TreeBranchBlock::new);
 
-    public TreeBranchBlock() {
-        this(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().sound(SoundType.WOOD).noOcclusion().noCollission());
-    }
-
     public TreeBranchBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));

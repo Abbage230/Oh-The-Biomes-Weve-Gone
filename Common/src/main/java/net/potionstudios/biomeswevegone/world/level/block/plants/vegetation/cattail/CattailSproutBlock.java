@@ -29,8 +29,8 @@ public class CattailSproutBlock extends Block implements SimpleWaterloggedBlock,
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private final Supplier<? extends CattailPlantBlock> cattailBlock;
 
-    public CattailSproutBlock(Supplier<? extends CattailPlantBlock> cattailBlock) {
-        super(BlockBehaviour.Properties.of().noCollission().noCollission().randomTicks().sound(SoundType.WET_GRASS).strength(0.0F));
+    public CattailSproutBlock(BlockBehaviour.Properties properties, Supplier<? extends CattailPlantBlock> cattailBlock) {
+        super(properties);
         this.cattailBlock = cattailBlock;
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
     }

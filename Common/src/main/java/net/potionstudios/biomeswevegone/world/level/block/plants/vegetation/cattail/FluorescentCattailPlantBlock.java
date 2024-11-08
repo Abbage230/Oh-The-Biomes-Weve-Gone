@@ -28,8 +28,8 @@ public class FluorescentCattailPlantBlock extends CattailPlantBlock {
 
 	public static final EnumProperty<ColorProperty> COLOR = EnumProperty.create("color", ColorProperty.class);
 
-	public FluorescentCattailPlantBlock(Supplier<Supplier<Item>> sprout) {
-		super(BlockBehaviour.Properties.of().noCollission().noCollission().sound(SoundType.WET_GRASS).strength(0.0F).lightLevel(level -> 12), sprout);
+	public FluorescentCattailPlantBlock(BlockBehaviour.Properties properties, Supplier<Supplier<Item>> sprout) {
+		super(properties, sprout);
 		this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(WATERLOGGED, false).setValue(COLOR, ColorProperty.NO_COLOR));
 	}
 

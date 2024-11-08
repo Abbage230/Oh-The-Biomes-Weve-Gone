@@ -26,8 +26,8 @@ import net.potionstudios.biomeswevegone.world.level.block.BWGBlocks;
 import org.jetbrains.annotations.NotNull;
 
 public class PalePumpkinBlock extends PumpkinBlock {
-    public PalePumpkinBlock() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.PUMPKIN));
+    public PalePumpkinBlock(BlockBehaviour.Properties properties) {
+        super(properties);
     }
 
     @Override

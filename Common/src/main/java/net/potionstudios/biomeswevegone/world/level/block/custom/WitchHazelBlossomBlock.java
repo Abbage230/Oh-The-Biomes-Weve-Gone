@@ -13,8 +13,8 @@ import net.potionstudios.biomeswevegone.client.particle.BWGParticles;
 import org.jetbrains.annotations.NotNull;
 
 public class WitchHazelBlossomBlock extends SporeBlossomBlock {
-    public WitchHazelBlossomBlock() {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).instabreak().sound(SoundType.TWISTING_VINES).noOcclusion().noCollission().lightLevel((state) -> 10));
+    public WitchHazelBlossomBlock(BlockBehaviour.Properties properties) {
+        super(properties);
     }
 
     @Override

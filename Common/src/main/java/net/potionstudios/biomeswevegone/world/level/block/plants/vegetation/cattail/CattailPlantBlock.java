@@ -37,10 +37,6 @@ public class CattailPlantBlock extends DoublePlantBlock implements SimpleWaterlo
         this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(WATERLOGGED, false));
     }
 
-    public CattailPlantBlock(Supplier<Supplier<Item>> sprout) {
-        this(BlockBehaviour.Properties.of().noCollission().noCollission().sound(SoundType.WET_GRASS).strength(0.0F), sprout);
-    }
-
     @Override
     public boolean canSurvive(BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
         DoubleBlockHalf half = state.getValue(HALF);

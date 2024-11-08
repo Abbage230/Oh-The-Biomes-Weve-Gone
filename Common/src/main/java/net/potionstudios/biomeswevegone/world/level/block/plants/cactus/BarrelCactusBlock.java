@@ -24,8 +24,8 @@ import net.potionstudios.biomeswevegone.world.level.block.BWGBlocks;
 import org.jetbrains.annotations.NotNull;
 
 public class BarrelCactusBlock extends BWGCactusBlock implements BonemealableBlock {
-	public BarrelCactusBlock() {
-		super(BlockBehaviour.Properties.ofFullCopy(Blocks.CACTUS).noOcclusion());
+	public BarrelCactusBlock(BlockBehaviour.Properties properties) {
+		super(properties);
 	}
 
 	@Override
