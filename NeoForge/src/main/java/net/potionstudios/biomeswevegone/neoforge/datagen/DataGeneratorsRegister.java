@@ -56,7 +56,7 @@ class DataGeneratorsRegister {
 
         ModelGenerators.init(generator, event.includeClient(), output, existingFileHelper);
         generator.addProvider(event.includeClient(), new LangGenerator(output, "en_us"));
-        generator.addProvider(event.includeServer(), new RecipeGenerator(output, lookupProvider));
+        generator.addProvider(event.includeServer(), new RecipeGenerator.Runner(output, lookupProvider));
         generator.addProvider(event.includeServer(), new LootGenerator(output, lookupProvider));
         generator.addProvider(event.includeServer(), new GlobalLootModifiersGenerator(output, lookupProvider));
         BWGBiomeModifiers.init();
