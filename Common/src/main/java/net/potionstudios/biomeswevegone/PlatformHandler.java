@@ -62,8 +62,8 @@ public interface PlatformHandler {
 	 * @param highlightColor The highlight color of the spawn egg
 	 * @return Supplier of the SpawnEggItem
 	 */
-	default Supplier<SpawnEggItem> createSpawnEgg(Supplier<EntityType<? extends Mob>> entity, int backgroundColor, int highlightColor) {
-		return () -> new SpawnEggItem(entity.get(), backgroundColor, highlightColor, new Item.Properties());
+	default SpawnEggItem createSpawnEgg(Supplier<EntityType<? extends Mob>> entity, int backgroundColor, int highlightColor, Item.Properties properties) {
+		return new SpawnEggItem(entity.get(), backgroundColor, highlightColor, properties);
 	}
 
 	/**
@@ -84,8 +84,8 @@ public interface PlatformHandler {
 	 * @param sound The sound to be played when the mob bucket is used
 	 * @return Supplier of the MobBucketItem
 	 */
-	default Supplier<MobBucketItem> createMobBucket(Supplier<EntityType<? extends Mob>> entity, Supplier<Fluid> fluid, Supplier<SoundEvent> sound) {
-		return () -> new MobBucketItem(entity.get(), fluid.get(), sound.get(), new Item.Properties().stacksTo(1));
+	default MobBucketItem createMobBucket(Supplier<EntityType<? extends Mob>> entity, Supplier<Fluid> fluid, Supplier<SoundEvent> sound, Item.Properties properties) {
+		return new MobBucketItem(entity.get(), fluid.get(), sound.get(), properties);
 	}
 
 	default BWGFarmLandBlock bwgFarmLandBlock(BlockBehaviour.Properties properties, Supplier<Block> dirt) {

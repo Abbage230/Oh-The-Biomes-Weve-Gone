@@ -51,8 +51,8 @@ public class NeoForgePlatformHandler implements PlatformHandler{
 	}
 
 	@Override
-	public Supplier<SpawnEggItem> createSpawnEgg(Supplier<EntityType<? extends Mob>> entity, int backgroundColor, int highlightColor) {
-		return () -> new DeferredSpawnEggItem(entity, backgroundColor, highlightColor, new Item.Properties());
+	public SpawnEggItem createSpawnEgg(Supplier<EntityType<? extends Mob>> entity, int backgroundColor, int highlightColor, Item.Properties properties) {
+		return new DeferredSpawnEggItem(entity, backgroundColor, highlightColor, properties);
 	}
 
 	@Override

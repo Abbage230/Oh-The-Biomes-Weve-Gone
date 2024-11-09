@@ -49,8 +49,8 @@ public class BWGItems {
 
     public static final Supplier<MobBucketItem> MAN_O_WAR_BUCKET = registerMobBucket("man_o_war_bucket", BWGEntities.MAN_O_WAR::get, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH);
 
-    public static final Supplier<Item> CATTAIL_SPROUT = registerItemNoLang("cattail_sprout", () -> new CampfireExplodingBlockItem(BWGBlocks.CATTAIL_SPROUT, new Item.Properties()));
-    public static final Supplier<Item> FLUORESCENT_CATTAIL_SPROUT = registerItemNoLang("fluorescent_cattail_sprout", () -> new CampfireExplodingBlockItem(BWGBlocks.FLUORESCENT_CATTAIL_SPROUT, new Item.Properties()));
+    public static final Supplier<Item> CATTAIL_SPROUT = registerItemNoLang("cattail_sprout", properties -> new CampfireExplodingBlockItem(BWGBlocks.CATTAIL_SPROUT, properties), new Item.Properties());
+    public static final Supplier<Item> FLUORESCENT_CATTAIL_SPROUT = registerItemNoLang("fluorescent_cattail_sprout", properties -> new CampfireExplodingBlockItem(BWGBlocks.FLUORESCENT_CATTAIL_SPROUT, properties), new Item.Properties());
 
     public static final Supplier<Item> BLUE_GLOWCANE_SHOOT = registerSimpleItem("blue_glowcane_shoot", properties -> new BlockItem(BWGBlocks.BLUE_GLOWCANE.get(), properties), new Item.Properties().useItemDescriptionPrefix());
     public static final Supplier<Item> GREEN_GLOWCANE_SHOOT = registerSimpleItem("green_glowcane_shoot", properties -> new BlockItem(BWGBlocks.GREEN_GLOWCANE.get(), properties),  new Item.Properties().useItemDescriptionPrefix());
@@ -106,22 +106,20 @@ public class BWGItems {
 
     public static final Supplier<Item> ALOE_VERA_JUICE = registerSimpleItem("aloe_vera_juice", Item::new, new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16).food(new FoodProperties.Builder().nutrition(3).saturationModifier(1.0F).build(), Consumables.HONEY_BOTTLE).usingConvertsTo(Items.GLASS_BOTTLE));
 
-    public static final Supplier<PlaceOnWaterBlockItem> TINY_LILY_PADS = registerItemNoLang("tiny_lily_pads", () -> new PlaceOnWaterBlockItem(BWGBlocks.TINY_LILY_PADS.get(), new Item.Properties()));
-    public static final Supplier<PlaceOnWaterBlockItem> FLOWERING_TINY_LILY_PADS = registerItemNoLang("flowering_tiny_lily_pads", () -> new PlaceOnWaterBlockItem(BWGBlocks.FLOWERING_TINY_LILY_PADS.get(), new Item.Properties()));
-    public static final Supplier<PlaceOnWaterBlockItem> WATER_SILK = registerItemNoLang("water_silk", () -> new PlaceOnWaterBlockItem(BWGBlocks.WATER_SILK.get(), new Item.Properties()));
+    public static final Supplier<PlaceOnWaterBlockItem> TINY_LILY_PADS = registerItemNoLang("tiny_lily_pads", properties -> new PlaceOnWaterBlockItem(BWGBlocks.TINY_LILY_PADS.get(), properties), new Item.Properties());
+    public static final Supplier<PlaceOnWaterBlockItem> FLOWERING_TINY_LILY_PADS = registerItemNoLang("flowering_tiny_lily_pads", properties -> new PlaceOnWaterBlockItem(BWGBlocks.FLOWERING_TINY_LILY_PADS.get(), properties), new Item.Properties());
+    public static final Supplier<PlaceOnWaterBlockItem> WATER_SILK = registerItemNoLang("water_silk", properties -> new PlaceOnWaterBlockItem(BWGBlocks.WATER_SILK.get(), properties), new Item.Properties());
 
-    public static final Supplier<Item> MUSIC_DISC_PIXIE_CLUB = registerItemNoLang("music_disc_pixie_club", () -> new Item((new Item.Properties()).stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(BWGJukeBoxSongs.PIXIE_CLUB)));
+    public static final Supplier<Item> MUSIC_DISC_PIXIE_CLUB = registerItemNoLang("music_disc_pixie_club", Item::new, (new Item.Properties()).stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(BWGJukeBoxSongs.PIXIE_CLUB));
 
     private static Supplier<SpawnEggItem> registerSpawnEgg(String id, Supplier<EntityType<? extends Mob>> entity, int backgroundColor, int highlightColor) {
-        Supplier<SpawnEggItem> supplier = PlatformHandler.PLATFORM_HANDLER.createSpawnEgg(entity, backgroundColor, highlightColor);
-        supplier = registerItem(id, supplier);
+        Supplier<SpawnEggItem> supplier = registerItem(id, properties -> PlatformHandler.PLATFORM_HANDLER.createSpawnEgg(entity, backgroundColor, highlightColor, properties), new Item.Properties());
         SIMPLE_ITEMS.add(supplier);
         return supplier;
     }
 
     private static Supplier<MobBucketItem> registerMobBucket(String id, Supplier<EntityType<? extends Mob>> entity, Supplier<Fluid> fluid, Supplier<SoundEvent> sound) {
-        Supplier<MobBucketItem> supplier = PlatformHandler.PLATFORM_HANDLER.createMobBucket(entity, fluid, sound);
-        supplier = registerItem(id, supplier);
+        Supplier<MobBucketItem> supplier = registerItem(id, properties -> PlatformHandler.PLATFORM_HANDLER.createMobBucket(entity, fluid, sound, properties), new Item.Properties().stacksTo(1));
         SIMPLE_ITEMS.add(supplier);
         return supplier;
     }
@@ -138,8 +136,8 @@ public class BWGItems {
         return supplier;
     }
 
-    public static <I extends Item> Supplier<I> registerItemNoLang(String id, Supplier<I> item) {
-        Supplier<I> supplier = register(id, item);
+    public static <I extends Item> Supplier<I> registerItemNoLang(String id, Function<Item.Properties, I> function, Item.Properties properties) {
+        Supplier<I> supplier = register(id, function, properties);
         NO_LANG_ITEMS.add(supplier);
         return supplier;
     }

@@ -51,8 +51,8 @@ public class ForgePlatformHandler implements PlatformHandler {
 	}
 
 	@Override
-	public Supplier<SpawnEggItem> createSpawnEgg(Supplier<EntityType<? extends Mob>> entity, int backgroundColor, int highlightColor) {
-		return () -> new ForgeSpawnEggItem(entity, backgroundColor, highlightColor, new Item.Properties());
+	public SpawnEggItem createSpawnEgg(Supplier<EntityType<? extends Mob>> entity, int backgroundColor, int highlightColor, Item.Properties properties) {
+		return new ForgeSpawnEggItem(entity, backgroundColor, highlightColor, properties);
 	}
 
 	@Override
@@ -61,8 +61,8 @@ public class ForgePlatformHandler implements PlatformHandler {
 	}
 
 	@Override
-	public Supplier<MobBucketItem> createMobBucket(Supplier<EntityType<? extends Mob>> entity, Supplier<Fluid> fluid, Supplier<SoundEvent> sound) {
-		return () -> new MobBucketItem(entity, fluid, sound, new Item.Properties().stacksTo(1));
+	public MobBucketItem createMobBucket(Supplier<EntityType<? extends Mob>> entity, Supplier<Fluid> fluid, Supplier<SoundEvent> sound, Item.Properties properties) {
+		return new MobBucketItem(entity, fluid, sound, properties);
 	}
 
 	@Override
