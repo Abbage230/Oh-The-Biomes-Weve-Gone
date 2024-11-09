@@ -15,8 +15,8 @@ public class BWGSaplingBlock extends SaplingBlock {
 
     private final @NotNull TagKey<Block> groundTag;
 
-    public BWGSaplingBlock(@NotNull TagKey<Block> groundTag, TreeGrower treeGrower) {
-        super(treeGrower, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public BWGSaplingBlock(BlockBehaviour.Properties properties, @NotNull TagKey<Block> groundTag, TreeGrower treeGrower) {
+        super(treeGrower, properties);
 	    this.groundTag = groundTag;
     }
 

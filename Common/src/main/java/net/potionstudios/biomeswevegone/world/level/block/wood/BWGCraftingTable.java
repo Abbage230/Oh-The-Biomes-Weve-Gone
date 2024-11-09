@@ -10,10 +10,8 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CraftingTableBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -23,8 +21,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public class BWGCraftingTable extends CraftingTableBlock {
     private static final Component CONTAINER_TITLE = Component.translatable("container.crafting");
-    public BWGCraftingTable(MapColor color) {
-        super(Properties.ofFullCopy(Blocks.CRAFTING_TABLE).mapColor(color));
+    public BWGCraftingTable(Block.Properties properties) {
+        super(properties);
     }
 
     @Override
