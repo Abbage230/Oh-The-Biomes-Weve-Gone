@@ -1,6 +1,7 @@
 package net.potionstudios.biomeswevegone.world.level.block.plants;
 
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.potionstudios.biomeswevegone.PlatformHandler;
 import net.potionstudios.biomeswevegone.world.level.block.BWGBlocks;
@@ -17,8 +18,8 @@ public class PottedBlock {
         this.pottedBlock = pottedBlock;
     }
 
-    public PottedBlock(String id, @NotNull Supplier<? extends Block> block) {
-        this(block, BWGBlocks.registerBlock("potted_" + id, PlatformHandler.PLATFORM_HANDLER.createPottedBlock(block)));
+    public PottedBlock(String id, BlockBehaviour.Properties properties, @NotNull Supplier<? extends Block> block) {
+        this(block, BWGBlocks.registerBlock("potted_" + id, properties1 -> PlatformHandler.PLATFORM_HANDLER.createPottedBlock(properties1, block), properties));
     }
 
     public Supplier<? extends Block> getBlockSupplier() {

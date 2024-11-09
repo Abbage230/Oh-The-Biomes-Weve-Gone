@@ -299,22 +299,22 @@ public class BWGBlocks {
 
     private static FlowerBlockFeature registerFlower(String key, MapColor mapColor) {
         Supplier<? extends Block> flower = registerBlockItem(key, BWGFlowerBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_TULIP).mapColor(mapColor).noOcclusion());
-        return new FlowerBlockFeature(key, flower);
+        return new FlowerBlockFeature(key, BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT), flower);
     }
 
     private static FlowerBlockFeature registerFlower(String key, MapColor mapColor, VoxelShape shape) {
         Supplier<? extends Block> flower = registerBlockItem(key, properties -> new BWGFlowerBlock(properties, BlockTags.DIRT, shape), BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_TULIP).mapColor(mapColor).noOcclusion());
-        return new FlowerBlockFeature(key, flower);
+        return new FlowerBlockFeature(key, BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT), flower);
     }
 
     private static FlowerBlockFeature registerFlower(String key, MapColor mapColor, VoxelShape shape, Supplier<? extends Block> growAble) {
         Supplier<? extends Block> flower = registerBlockItem(key, properties -> new BWGBonemealableFlowerBlock(properties, BlockTags.DIRT, shape, growAble), BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_TULIP).mapColor(mapColor).noOcclusion());
-        return new FlowerBlockFeature(key, flower);
+        return new FlowerBlockFeature(key, BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT), flower);
     }
 
     private static FlowerBlockFeature registerFlower(String key, BlockBehaviour.Properties properties, VoxelShape shape) {
         Supplier<? extends Block> flower = registerBlockItem(key, properties1 -> new BWGFlowerBlock(properties1, BlockTags.DIRT, shape), properties);
-        return new FlowerBlockFeature(key, flower);
+        return new FlowerBlockFeature(key, BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT), flower);
     }
 
     private static Supplier<TallFlowerBlock> registerTallFlower(String key, MapColor mapColor) {
@@ -354,12 +354,12 @@ public class BWGBlocks {
 
     public static <B extends Block> PottedBlock createPottedVariant(String key, Function<BlockBehaviour.Properties, B> function, BlockBehaviour.Properties properties) {
         Supplier<B> block = registerBlockItem(key, function, properties);
-        return new PottedBlock(key, block);
+        return new PottedBlock(key, BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT), block);
     }
 
     public static <B extends Block> PottedBlock createPottedVariantWithoutItem(String key, Function<BlockBehaviour.Properties, B> function, BlockBehaviour.Properties properties) {
         Supplier<B> block = registerBlock(key, function, properties);
-        return new PottedBlock(key, block);
+        return new PottedBlock(key, BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT), block);
     }
 
     public static <B extends Block> Supplier<B> registerBlock(String id, Function<BlockBehaviour.Properties, B> function, BlockBehaviour.Properties properties) {

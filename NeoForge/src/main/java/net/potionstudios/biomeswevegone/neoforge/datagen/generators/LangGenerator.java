@@ -15,6 +15,7 @@ import net.potionstudios.biomeswevegone.world.item.BWGItems;
 import net.potionstudios.biomeswevegone.world.item.jukebox.BWGJukeBoxSongs;
 import net.potionstudios.biomeswevegone.world.level.block.BWGBlocks;
 import net.potionstudios.biomeswevegone.world.level.block.wood.BWGWood;
+import net.potionstudios.biomeswevegone.world.level.block.wood.BWGWoodSet;
 import net.potionstudios.biomeswevegone.world.level.levelgen.biome.BWGBiomes;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,17 +39,16 @@ public class LangGenerator extends LanguageProvider {
         BWGItems.ITEMS.forEach(item -> add(item.get(), getItemName(item)));
         add(BWGItems.MUSIC_DISC_PIXIE_CLUB.get(), "Music Disc");
         add("jukebox_song." + BWGJukeBoxSongs.PIXIE_CLUB.location().toLanguageKey(), "AOCAWOL - Pixie Club");
-        BWGWood.WOOD_BLOCK_ITEMS.forEach(wood -> {
-            if (!(wood.get() instanceof BWGBoatItem boatItem) || !boatItem.hasChest())
-                add(wood.get(), getItemName(wood));
-            else add(wood.get(), getItemName(wood).replace("Chest ", "") + " with Chest");
-        });
         BWGWood.WOOD.stream().filter(wood -> wood.get() instanceof FlowerPotBlock).forEach(wood -> add(wood.get(), getBlockName(wood)));
         add(BWGEntities.MAN_O_WAR.get(), "Man O' War");
         add(BWGEntities.PUMPKIN_WARDEN.get(), "Pumpkin Warden");
         add(BWGEntities.ODDION.get(), "Oddion");
-        add(BWGEntities.BWG_BOAT.get(), "Boat");
-        add(BWGEntities.BWG_CHEST_BOAT.get(), "Boat with Chest");
+        BWGWoodSet.woodsets().forEach(bwgWoodSet -> {
+            add(bwgWoodSet.boatItem().get(), getItemName(bwgWoodSet.boatItem()));
+            add(bwgWoodSet.chestBoatItem().get(), getItemName(bwgWoodSet.chestBoatItem()));
+            add(bwgWoodSet.boat().get(), bwgWoodSet.name().substring(0, 1).toUpperCase() + bwgWoodSet.name().substring(1) + " Boat");
+            add(bwgWoodSet.chestBoat().get(), bwgWoodSet.name().substring(0, 1).toUpperCase() + bwgWoodSet.name().substring(1) + " Boat with Chest");
+        });
         BWGBiomes.BIOME_FACTORIES.forEach((key, factory) -> add("biome." + BiomesWeveGone.MOD_ID + "." + key.location().getPath(), getBiomeName(key)));
 
         add(advancement("title.root"), "Oh The Biomes We've Gone");

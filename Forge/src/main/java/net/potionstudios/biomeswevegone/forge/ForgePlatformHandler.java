@@ -56,8 +56,8 @@ public class ForgePlatformHandler implements PlatformHandler {
 	}
 
 	@Override
-	public Supplier<FlowerPotBlock> createPottedBlock(Supplier<? extends Block> block) {
-		return () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, block, BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT));
+	public FlowerPotBlock createPottedBlock(BlockBehaviour.Properties properties, Supplier<? extends Block> block) {
+		return new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, block, properties);
 	}
 
 	@Override

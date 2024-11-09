@@ -174,7 +174,7 @@ public class BWGWood {
     
     protected static PottedBlock createSapling(String key, Supplier<TreeGrower> grower, TagKey<Block> ground) {
         Supplier<SaplingBlock> sapling = registerBlockItem(key + "_sapling", properties -> new BWGSaplingBlock(properties, ground, grower.get()), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-        return new PottedBlock(sapling, register("potted_" + key + "_sapling", PlatformHandler.PLATFORM_HANDLER.createPottedBlock(sapling)));
+        return new PottedBlock(sapling, register("potted_" + key + "_sapling", properties -> PlatformHandler.PLATFORM_HANDLER.createPottedBlock(properties, sapling), BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT)));
     }
 
     private static <B extends Block> Supplier<B> registerNonSetBlockItem(String key, Function<BlockBehaviour.Properties, B> function, BlockBehaviour.Properties properties) {
