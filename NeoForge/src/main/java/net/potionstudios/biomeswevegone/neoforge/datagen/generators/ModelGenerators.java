@@ -181,7 +181,7 @@ public class ModelGenerators {
                 } else if (block instanceof FlowerPotBlock) {
                     if (((FlowerPotBlock) block).getPotted() == BWGBlocks.WHITE_PUFFBALL.getBlock())
                         simpleBlock(block, models().getExistingFile(blockBWGTexture(BWGBlocks.WHITE_PUFFBALL.getPottedBlock())));
-                    else simpleBlock(block, models().withExistingParent(name(block), mcLoc("block/flower_pot_cross")).texture("plant", blockBWGTexture(((FlowerPotBlock) block).getPotted())).renderType("cutout"));
+                    else simpleBlock(block, models().flowerPotCross(name(block), blockBWGTexture(((FlowerPotBlock) block).getPotted())).renderType("cutout"));
                 } else if (block instanceof HugeMushroomBlock)
                     simpleBlockItem(block, models().cubeAll(name(block) + "_inventory", blockBWGTexture(block)));
                 else if (block instanceof PinkPetalsBlock) {

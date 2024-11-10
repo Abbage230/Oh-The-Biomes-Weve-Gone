@@ -8,11 +8,9 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.*;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
@@ -21,7 +19,6 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.potionstudios.biomeswevegone.BiomesWeveGone;
@@ -48,11 +45,6 @@ public class NeoForgePlatformHandler implements PlatformHandler{
 	@Override
 	public Path configPath() {
 		return FMLPaths.CONFIGDIR.get().resolve(BiomesWeveGone.MOD_ID);
-	}
-
-	@Override
-	public SpawnEggItem createSpawnEgg(Supplier<EntityType<? extends Mob>> entity, int backgroundColor, int highlightColor, Item.Properties properties) {
-		return new DeferredSpawnEggItem(entity, backgroundColor, highlightColor, properties);
 	}
 
 	@Override
